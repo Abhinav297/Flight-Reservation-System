@@ -1,42 +1,67 @@
-package com.upgrad;
+package com.company;
 
 public class Flight {
-    public String flightNumber;
-    public String airline;
-    public int capacity;
-    private int bookedSeats;
+    private String flightNumber;
+    private String airline;
+    private int capacity;
+    private int bookedSeat;
 
-    public Flight() {
-
-    }
-
-    public Flight(String flightNumber, String airline, int capacity,int bookedSeats) {
+    public Flight(String flightNumber, String airline, int capacity, int bookedSeat) {
         this.flightNumber = flightNumber;
         this.airline = airline;
         this.capacity = capacity;
-        this.bookedSeats = bookedSeats;
+        this.bookedSeat = bookedSeat;
     }
 
-    public int getBookedSeats() {
-        return bookedSeats;
-    }
-
-    public void setBookedSeats(int bookedSeats) {
-        this.bookedSeats = bookedSeats;
-    }
-
-    public String getFlightDetails() {
-        return flightNumber + ", " + airline;
-    }
-    public boolean checkAvailability() {
-        if (capacity == bookedSeats) {
-            return false;
-        }
-        else {
+    public boolean checkAvailability(){
+        if(this.bookedSeat < capacity)
             return true;
-        }
+        else
+            return false;
     }
     public void incrementBookingCounter() {
+        this.bookedSeat++;
+    }
 
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public String getAirline() {
+        return airline;
+    }
+
+    public void setAirline(String airline) {
+        this.airline = airline;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getBookedSeat() {
+        return bookedSeat;
+    }
+
+    public void setBookedSeat(int bookedSeat) {
+        this.bookedSeat = bookedSeat;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightNumber='" + flightNumber + '\'' +
+                ", airline='" + airline + '\'' +
+                ", capacity=" + capacity +
+                ", bookedSeat=" + bookedSeat +
+                '}';
     }
 }
