@@ -1,21 +1,19 @@
-package com.upgrad;
+package com.company;
 
-public class RegularTicket {
-    public String specialService;
+public class RegularTicket extends Ticket {
+    private  String specialServices;
 
-    public RegularTicket() {
-
+    public RegularTicket(String pnr, String from, String to, String departureTimeStamp, String arrivalTimeStamp, boolean cancelled, Flight flight, Passenger passenger, String specialServices) {
+        super(pnr, from, to, departureTimeStamp, arrivalTimeStamp, cancelled, flight, passenger);
+        this.specialServices = specialServices;
     }
 
-    public RegularTicket(String specialService) {
-        this.specialService = specialService;
+    public String getSpecialServices() {
+        return specialServices;
     }
 
-    public String getSpecialService(){
-        return specialService;
-    }
-    public String updateSpecialService(String _specialService) {
-        specialService = _specialService;
-        return specialService;
+    public void setSpecialServices(String specialServices) {
+        this.specialServices = specialServices;
     }
 }
+
