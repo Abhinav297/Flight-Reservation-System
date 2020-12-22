@@ -1,40 +1,122 @@
-package com.upgrad;
+package com.company;
 
-public class Ticket {
-    public String pnr;
-    public String from;
-    public String to;
-    public Flight flight;
-    public String departureDateTime;
-    public String arrivalDateTime;
-    public Passenger passenger;
-    public String seatNo;
-    public float price;
-    public boolean isActive = false;
+import java.time.LocalDateTime;
 
-    public Ticket() {
+public abstract class Ticket {
 
-    }
+    private String pnr;
+    private  String from;
+    private  String to;
+    private String departureTimeStamp;
+    private String arrivalTimeStamp;
+    private boolean cancelled;
 
-    public Ticket(String pnr, String from, String to) {
+    public Ticket(String pnr, String from, String to, String departureTimeStamp, String arrivalTimeStamp, boolean cancelled, Flight flight, Passenger passenger) {
         this.pnr = pnr;
         this.from = from;
         this.to = to;
+        this.departureTimeStamp = departureTimeStamp;
+        this.arrivalTimeStamp = arrivalTimeStamp;
+        this.cancelled = cancelled;
+        this.flight = flight;
+        this.passenger = passenger;
     }
 
-    public String checkStatus() {
-        if (isActive == true) {
-            return "Booked";
-        }
-        else {
-            return "Cancelled";
-        }
+    public String getPnr() {
+        return pnr;
     }
 
-    public int getFlightDuration() {
-        return 1;
+    public void setPnr(String pnr) {
+        this.pnr = pnr;
     }
 
-    public void cancelled() {
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public String getDepartureTimeStamp() {
+        return departureTimeStamp;
+    }
+
+    public void setDepartureTimeStamp(String departureTimeStamp) {
+        this.departureTimeStamp = departureTimeStamp;
+    }
+
+    public String getArrivalTimeStamp() {
+        return arrivalTimeStamp;
+    }
+
+    public void setArrivalTimeStamp(String arrivalTimeStamp) {
+        this.arrivalTimeStamp = arrivalTimeStamp;
+    }
+
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
+
+    Flight flight;
+    Passenger passenger;
+
+    public Ticket(Flight flight, Passenger passenger) {
+        this.flight = flight;
+        this.passenger = passenger;
+    }
+
+    public void cancelTicket(){
+        this.cancelled = true;
+    }
+
+    public int getFlightDuration(){
+        LocalDateTime departureTimeStamp = LocalDateTime.parse(this.departureTimeStamp);
+        LocalDateTime arrivalTimeStamp = LocalDateTime.parse(this.arrivalTimeStamp);
+        int days = arrivalTimeStamp.getDayOfMonth() - departureTimeStamp.getDayOfMonth();
+        int totalHours = (days * 24) + (arrivalTimeStamp.getHour() -departureTimeStamp.getHour());
+        return totalHours;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "pnr='" + pnr + '\'' +
+                ", from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", departureTimeStamp='" + departureTimeStamp + '\'' +
+                ", arrivalTimeStamp='" + arrivalTimeStamp + '\'' +
+                ", cancelled=" + cancelled +
+                ", flight=" + flight +
+                ", passenger=" + passenger +
+                '}';
     }
 }
